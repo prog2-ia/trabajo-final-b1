@@ -13,7 +13,7 @@ class Producto(ABC):
     def precio(self, valor):
         self.__precio = round(float(valor), 1) if valor >= 0 else 0.0
 
-@abstractmethod
+    @abstractmethod
     def __str__(self): pass
 
 class Electronica(Producto):
