@@ -1,0 +1,3 @@
+# Dependencias del Marketplace
+# Este proyecto utiliza únicamente la biblioteca estándar de Python.
+# Compatible con Python 3.10 o superior.
