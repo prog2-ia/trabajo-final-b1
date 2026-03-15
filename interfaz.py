@@ -5,7 +5,7 @@ def mostrar_menu():
     print("1. Ver catalogo\n2. Vender producto\n3. Negociar/Comprar\n4. Salir")
     return input("Selección: ")
 
-def pedir_datos_venta(): #Datos necesarios para publicar un producto.
+def pedir_datos_venta(): #Datos necesarios para publicar un producto
     print("\n--- PUBLICAR ---")
     n = input("Nombre: ")
     p = float(input("Precio: "))
