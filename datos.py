@@ -63,7 +63,7 @@ class Producto(ABC): #Clase padre para todos los productos.
     @abstractmethod
     def __str__(self): pass
 
-class Electronica(Producto) #Clases derivadas de productos y como se muestran.
+class Electronica(Producto): #Clases derivadas de productos y como se muestran.
     def __str__(self): return f"[{self.id_prod}] {self.nombre} (Electrónica) - {self.precio}€"
 
 class Ropa(Producto):
