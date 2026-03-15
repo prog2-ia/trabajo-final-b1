@@ -11,7 +11,7 @@ class Vendedor(ABC): #Creamos la clase padre para los vendedores
     def negociar(self, precio_original, oferta_comprador):
         pass
 
-class Desesperado(Vendedor): #Subclase 1º de vendedores.
+class Desesperado(Vendedor): #Subclase 1º de vendedores
     def __init__(self, nombre):
         super().__init__(nombre)
         self.frases_negociao = ["¡Necesito comer porfa!", "Uff, lo necesito vender ya...", "Acepta esto, es mi última esperanza."]
