@@ -15,7 +15,14 @@ Simulador de mercado. Permite gestionar un catálogo de productos y negociar pre
 - `interfaz.py`: Manejo de menús y mensajes de usuario.
 - `mainpro.py`: Punto de entrada del programa.
 
-## Cómo ejecutar el programa
-Para iniciar el Marketplace, abre tu terminal en la carpeta del proyecto y ejecuta:
+## Cómo ejecutar el programa e instalar los recursos
 
+Para instalar las dependencias actuales y futuras, ejecuta:
+
+```bash
+pip install -r requirements.txt
+```
+Para iniciar el Marketplace, abre tu terminal en la carpeta del proyecto y ejecuta:
+```bash
 python mainpro.py
+```
