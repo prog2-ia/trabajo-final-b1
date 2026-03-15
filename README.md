@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/09uckVan)
 # Marketplace
 
-Simulador de mercado. Permite gestionar un catálogo de productos y negociar precios con vendedores que poseen personalidades diferentes.
+Simulador de mercado. Permite gestionar un catálogo de productos y negociar precios con vendedores que poseen personalidades diferentes. El catálogo al principio está vacío. Primero prueba a vender un producto y verás que se añade al catálogo. Después prueba a comprarlo y a negociar con el vendedor. 
 
 ## Características
 - **Jerarquía de Clases**: Categorías de Electrónica, Ropa, Hogar y Deportes.
