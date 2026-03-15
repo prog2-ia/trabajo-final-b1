@@ -1,7 +1,7 @@
 from datos import Producto
 
 class Marketplace:
-    def __init__(self): #Creamos el inventario
+    def __init__(self): #Creamos el inventario.
         self._inventario = [] # Miembro protegido
         self.contador_ids = 1
 

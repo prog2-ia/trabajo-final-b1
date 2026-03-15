@@ -3,7 +3,7 @@ from logica import Marketplace #Importamos _todo lo necesario de otros archivos
 import interfaz
 import random
 
-def app(): #Funcion principal
+def app(): #Funcion principal.
     mercado = Marketplace()
 
     while True:
