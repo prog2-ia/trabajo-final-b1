@@ -5,11 +5,11 @@ class Marketplace:
         self._inventario = [] # Miembro protegido
         self.contador_ids = 1
 
-        v1 = Tacanyo("Julián")
+        v1 = Tacanyo("Julián") #Vendedores creados por defecto
         v2 = Normal("Marta")
         v3 = Desesperado("Juan")
 
-        self.vender_producto(Electronica(self.contador_ids, "iPhone 13", 600, v1))
+        self.vender_producto(Electronica(self.contador_ids, "iPhone 13", 600, v1)) #Productos creados por defectos
         self.vender_producto(Ropa(self.contador_ids, "Camiseta Vintage", 25, v2))
         self.vender_producto(Hogar(self.contador_ids, "Lámpara de pie", 45, v3))
 
