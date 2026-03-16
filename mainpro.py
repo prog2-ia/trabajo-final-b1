@@ -9,8 +9,12 @@ def app(): #Funcion principal
     while True:
         opc = interfaz.mostrar_menu()
 
-        if opc == "1": #Si se selecciona la opcion 1 mostrar el catalogo.
-            for p in mercado._inventario: print(p)
+        if opc == "1":  # Si se selecciona la opcion 1 mostrar el catalogo.
+            # --- AÑADIDO: VALIDACIÓN CATÁLOGO VACÍO ---
+            if not mercado._inventario:
+                print("\n[!] El catálogo está vacío. Prueba a vender un producto para luego poder comprarlo.")
+            else:
+                for p in mercado._inventario: print(p)
 
         elif opc == "2": #Si se selecciona la opcion 2 se vende un producto.
             n, p, v_nom, cat = interfaz.pedir_datos_venta()
