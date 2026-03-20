@@ -1,4 +1,4 @@
-from logica.logica import Marketplace #Importamos _todo lo necesario de otros archivos
+from logica.marketplace import Marketplace #Importamos _todo lo necesario de otros archivos
 from interfaz import interfaz
 import random
 
