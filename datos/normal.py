@@ -1,4 +1,5 @@
 from datos.vendedor import Vendedor
+import random
 
 class Normal(Vendedor): #Subclase 2º de vendedor.
     def __init__(self, nombre):

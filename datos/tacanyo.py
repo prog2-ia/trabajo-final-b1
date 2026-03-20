@@ -1,4 +1,5 @@
 from datos.vendedor import Vendedor
+import random
 
 class Tacanyo(Vendedor): #Subclase 3º de vendedor.
     def __init__(self, nombre):
