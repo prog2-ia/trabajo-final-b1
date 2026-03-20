@@ -1,6 +1,11 @@
-from logica.marketplace import Marketplace #Importamos _todo lo necesario de otros archivos
-from interfaz import interfaz
+from interfazcarp import interfaz
+from logica.marketplace import Marketplace
+from datos.desesperado import Desesperado
+from datos.normal import Normal
+from datos.tacanyo import Tacanyo
+from datos.subproductos import Electronica, Ropa, Hogar, Deportes
 import random
+
 
 def app(): #Funcion principal
     mercado = Marketplace()

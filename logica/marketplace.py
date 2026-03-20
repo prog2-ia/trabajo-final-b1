@@ -1,4 +1,8 @@
-from datos import Producto, Electronica, Ropa, Hogar, Tacanyo, Normal, Desesperado
+from datos.producto import Producto
+from datos.subproductos import Electronica, Ropa, Hogar, Deportes
+from datos.tacanyo import Tacanyo
+from datos.normal import Normal
+from datos.desesperado import Desesperado
 
 class Marketplace:
     def __init__(self): #Creamos el inventario
