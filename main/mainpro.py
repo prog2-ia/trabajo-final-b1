@@ -1,6 +1,5 @@
-from datos import *
-from logica import Marketplace #Importamos _todo lo necesario de otros archivos
-import interfaz
+from logica.logica import Marketplace #Importamos _todo lo necesario de otros archivos
+from interfaz import interfaz
 import random
 
 def app(): #Funcion principal
