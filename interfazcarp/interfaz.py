@@ -1,22 +1,23 @@
 import random
+from datos.producto import Producto
 
-def mostrar_menu():
+def mostrar_menu() -> str:
     print("\n--- Marketplace ---")
     print("1. Ver catalogo\n2. Vender producto\n3. Negociar/Comprar\n4. Salir")
     return input("Selección: ")
 
-def pedir_datos_venta(): #Datos necesarios para publicar un producto.
+def pedir_datos_venta() -> tuple: #Datos necesarios para publicar un producto.
     print("\n--- PUBLICAR ---")
-    n = input("Nombre: ")
-    p = float(input("Precio: "))
-    v = input("Tu nombre: ")
+    n: str = input("Nombre: ")
+    p: float = float(input("Precio: "))
+    v: str = input("Tu nombre: ")
     print("Categoria: 1. Electronica | 2. Ropa | 3. Hogar | 4. Deportes")
-    c = input("Opcion: ")
+    c: str = input("Opcion: ")
     return n, p, v, c
 
-def mostrar_resultado_negociacion(estado, valor, producto): #Al negociar definimos las 3 respuestas.
+def mostrar_resultado_negociacion(estado: str, valor: float, producto: 'Producto') -> None: #Al negociar definimos las 3 respuestas.
 
-    frase = random.choice(producto.vendedor.frases_negociao)
+    frase: str = random.choice(producto.vendedor.frases_negociao)
     if estado == "ACEPTADA": #Si se acepta se muestra una frase de aceptación del vendedor y el mensaje de la compra
         print(f"\n¡TRATO HECHO! {producto.vendedor.nombre} dice: '{frase}'")
         print(f"Has comprado {producto.nombre} por {valor}€.")
