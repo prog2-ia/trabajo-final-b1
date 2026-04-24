@@ -13,15 +13,33 @@ class Marketplace:
         v2 = Normal("Marta")
         v3 = Desesperado("Juan")
 
-        self.vender_producto(Electronica(self.contador_ids, "iPhone 13", 600, v1)) #Productos creados por defectos
-        self.vender_producto(Ropa(self.contador_ids, "Camiseta Vintage", 25, v2))
-        self.vender_producto(Hogar(self.contador_ids, "Lámpara de pie", 45, v3))
+        # Uso del nuevo operador += definido abajo
+        self += Electronica(self.contador_ids, "iPhone 13", 600, v1)
+        self += Ropa(self.contador_ids, "Camiseta Vintage", 25, v2)
+        self += Hogar(self.contador_ids, "Lámpara de pie", 45, v3)
 
-    def vender_producto(self, producto: Producto): #Funcion para vender productos y añadirlos al catalogo.
-        self._inventario.append(producto)
-        self.contador_ids += 1
+    # T08: Sobrecarga de += para añadir productos al inventario directamente [cite: 306, 312]
+    def __iadd__(self, producto):
+        if isinstance(producto, Producto):
+            self._inventario.append(producto)
+            self.contador_ids += 1
+        return self
+
+    # T07: Permite usar len(mercado) para saber cuántos productos hay [cite: 20, 82]
+    def __len__(self):
+         return len(self._inventario)
+
+    # T08: Permite acceder a productos por índice: mercado[0]
+    def __getitem__(self, index):
+        return self._inventario[index]
+
+    # T07: Determina si el mercado tiene existencias en un contexto booleano
+    def __bool__(self):
+        return len(self._inventario) > 0
+
+    def vender_producto(self, producto):
+        self += producto  # Reutiliza el operador __iadd__
         return True
-
     def comprar_final(self, id_prod): #Funcion para comprar y eliminarlo del inventario.
         for p in self._inventario:
             if p.id_prod == id_prod:

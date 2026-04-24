@@ -15,10 +15,11 @@ def app(): #Funcion principal
 
         if opc == "1":  # Si se selecciona la opcion 1 mostrar el catalogo.
             # --- AÑADIDO: VALIDACIÓN CATÁLOGO VACÍO ---
-            if not mercado._inventario:
+            if not mercado:
                 print("\n[!] El catálogo está vacío. Prueba a vender un producto para luego poder comprarlo.") #Por si el catálogo está vacío
             else:
-                for p in mercado._inventario: print(p)
+                print(f"Artículos disponibles: {len(mercado)}")
+                for p in mercado: print(p)
 
         elif opc == "2": #Si se selecciona la opcion 2 se vende un producto.
             n, p, v_nom, cat = interfaz.pedir_datos_venta()

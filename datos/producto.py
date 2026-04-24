@@ -17,3 +17,6 @@ class Producto(ABC): #Clase padre para todos los productos.
 
     @abstractmethod
     def __str__(self): pass
+
+    def __len__(self):
+        return len(self.nombre)
