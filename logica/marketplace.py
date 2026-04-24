@@ -37,17 +37,17 @@ class Marketplace:
     def __bool__(self) -> bool:
         return len(self._inventario) > 0
 
-    def vender_producto(self, producto):
+    def vender_producto(self, producto: 'Producto') -> bool:
         self += producto  # Reutiliza el operador __iadd__
         return True
-    def comprar_final(self, id_prod): #Funcion para comprar y eliminarlo del inventario.
+    def comprar_final(self, id_prod: int) -> 'Producto' #Funcion para comprar y eliminarlo del inventario.
         for p in self._inventario:
             if p.id_prod == id_prod:
                 self._inventario.remove(p)
                 return p
         return None
 
-    def buscar_producto(self, id_p): #Funcion para buscar y comprar un producto.
+    def buscar_producto(self, id_p: int) -> 'Producto': #Funcion para buscar y comprar un producto.
         for p in self._inventario:
             if p.id_prod == id_p: return p
         return None
