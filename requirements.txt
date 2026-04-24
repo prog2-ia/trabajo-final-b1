@@ -1,5 +1,5 @@
 # Herramienta de comprobación de tipos
 mypy==1.15.0
 
-# Soporte para tipado avanzado
+# Soporte para tipado
 typing-extensions==4.12.2
