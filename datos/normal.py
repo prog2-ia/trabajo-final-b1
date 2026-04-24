@@ -6,10 +6,10 @@ class Normal(Vendedor): #Subclase 2º de vendedor.
         super().__init__(nombre)
         self.frases_negociao = ["Creo que el precio es justo.", "Podemos llegar a un acuerdo.", "Ni para ti ni para mí."]
 
-    def negociar(self, precio_original, oferta_comprador):
+    def negociar(self, precio_original: float, oferta_comprador: float) -> tuple:
         if oferta_comprador >= precio_original * 0.85:
             return "ACEPTADA", round(oferta_comprador, 1)
         elif oferta_comprador >= precio_original * 0.75:
-            contra = round(random.uniform(oferta_comprador, precio_original * 0.95), 1)
+            contra: float = round(random.uniform(oferta_comprador, precio_original * 0.95), 1)
             return "CONTRAOFERTA", contra
-        return "RECHAZADA", 0
+        return "RECHAZADA", 0.0
