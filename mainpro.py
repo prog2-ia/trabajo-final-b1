@@ -7,28 +7,27 @@ from datos.subproductos import Electronica, Ropa, Hogar, Deportes
 import random
 
 
-def app(): #Funcion principal
-    mercado = Marketplace()
+def app() -> None:
+    mercado: Marketplace = Marketplace()
 
     while True:
-        opc = interfaz.mostrar_menu()
+        opc: str = interfaz.mostrar_menu()
 
-        if opc == "1":  # Si se selecciona la opcion 1 mostrar el catalogo.
-            # --- AÑADIDO: VALIDACIÓN CATÁLOGO VACÍO ---
-            if not mercado:
-                print("\n[!] El catálogo está vacío. Prueba a vender un producto para luego poder comprarlo.") #Por si el catálogo está vacío
+        if opc == "1":
+            if not mercado:  # T07: Uso de __bool__
+                print("\n[!] El catálogo está vacío.")
             else:
-                print(f"Artículos disponibles: {len(mercado)}")
-                for p in mercado: print(p)
+                print(f"Artículos disponibles: {len(mercado)}")  # T07: Uso de __len__
+                for p in mercado:  # T08: Uso de __getitem__
+                    print(p)  # T07: Uso de __str__
 
-        elif opc == "2": #Si se selecciona la opcion 2 se vende un producto.
+        elif opc == "2":
             n, p, v_nom, cat = interfaz.pedir_datos_venta()
-            # Seleccion de personalidad
             clase_v = random.choice([Desesperado, Normal, Tacanyo])
             v = clase_v(v_nom)
-            print(f"*** Parece que el vendedor ha salido {clase_v.__name__} ***")
 
-            if cat == "1": #En funcion de la opcion se crea un tipo u otro de producto
+            # Creación de producto según categoría
+            if cat == "1":
                 nuevo = Electronica(mercado.contador_ids, n, p, v)
             elif cat == "2":
                 nuevo = Ropa(mercado.contador_ids, n, p, v)
@@ -39,18 +38,15 @@ def app(): #Funcion principal
 
             mercado.vender_producto(nuevo)
 
-        elif opc == "3": #Opcion 3 para comprar un producto ya subido.
-            id_p = int(input("ID del producto a negociar: "))
+        elif opc == "3":
+            id_p: int = int(input("ID del producto: "))
             prod = mercado.buscar_producto(id_p)
 
             if prod:
-                # Negociacion
-                negociando = True #Negociacion con el vendedor por el producto hasta que se venda o cancele.
+                negociando: bool = True
                 while negociando:
-                    oferta = float(input(f"Introduce tu oferta para {prod.nombre} (0 para cancelar): "))
-                    if oferta == 0:
-                        negociando = False
-                        continue
+                    oferta: float = float(input(f"Oferta por {prod.nombre} (0 para cancelar): "))
+                    if oferta == 0: break
 
                     res, val = prod.vendedor.negociar(prod.precio, oferta)
                     interfaz.mostrar_resultado_negociacion(res, val, prod)
@@ -61,7 +57,7 @@ def app(): #Funcion principal
             else:
                 print("ID no encontrado.")
 
-        elif opc == "4": #Opcion 4 para salir.
+        elif opc == "4":
             break
 
 
