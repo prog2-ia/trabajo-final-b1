@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 
-class Vendedor(ABC): #Creamos la clase padre para los vendedores
-    def __init__(self, nombre):
-        self.nombre = nombre
-        self.frases_negociao = []
+class Vendedor(ABC):
+    def __init__(self, nombre: str):
+        self.nombre: str = nombre
+        self.frases_negociao: list[str] = []
 
-    @abstractmethod #Necesario para todas las clases.
-    def negociar(self, precio_original, oferta_comprador):
+    @abstractmethod
+    def negociar(self, precio_original: float, oferta_comprador: float) -> tuple:
         pass
