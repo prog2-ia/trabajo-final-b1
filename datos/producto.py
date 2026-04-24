@@ -1,25 +1,25 @@
 from abc import ABC, abstractmethod
 from datos.vendedor import Vendedor
 
-class Producto(ABC): #Clase padre para todos los productos.
-    def __init__(self, id_prod, nombre, precio, vendedor_obj):
-        self.id_prod = id_prod
-        self.nombre = nombre
-        self.__precio = 0.0 # Miembro privado
-        self.precio = precio # Llama al setter
-        self.vendedor: 'Vendedor' = vendedor_obj # Tipo entre comillas para evitar errores
+class Producto(ABC):
+    def __init__(self, id_prod: int, nombre: str, precio: float, vendedor_obj: Vendedor):
+        self.id_prod: int = id_prod
+        self.nombre: str = nombre
+        self.__precio: float = 0.0
+        self.precio = precio  # Usa el setter
+        self.vendedor: "Vendedor" = vendedor_obj
 
-    @property #Precio obligatorio pero privado
-    def precio(self) -> float: #Indica que devuelve un float
+    @property
+    def precio(self) -> float:
         return self.__precio
 
-    @precio.setter #Funcion para seleccionar el precio.
-    def precio(self, valor: float) -> None: #No devuelve nada (None)
+    @precio.setter
+    def precio(self, valor: float) -> None:
         self.__precio = round(float(valor), 1) if valor >= 0 else 0.0
 
     @abstractmethod
-    def __str__(self) -> str: #Metodo especial para representar el objeto como texto
+    def __str__(self) -> str:
         pass
 
-    def __len__(self) -> int: #Devuelve la longitud del nombre del producto
+    def __len__(self) -> int:
         return len(self.nombre)
