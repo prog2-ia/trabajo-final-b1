@@ -5,36 +5,36 @@ from datos.normal import Normal
 from datos.desesperado import Desesperado
 
 class Marketplace:
-    def __init__(self): #Creamos el inventario
-        self._inventario = [] # Miembro protegido
-        self.contador_ids = 1
+    def __init__(self) -> None: #Creamos el inventario
+        self._inventario: list['Producto'] = [] # Miembro protegido
+        self.contador_ids: int = 1
 
-        v1 = Tacanyo("Julián") #Vendedores creados por defecto
-        v2 = Normal("Marta")
-        v3 = Desesperado("Juan")
+        v1: 'Tacanyo' = Tacanyo("Julián") #Vendedores creados por defecto
+        v2: 'Normal' = Normal("Marta")
+        v3: 'Desesperado' = Desesperado("Juan")
 
-        # Uso del nuevo operador += definido abajo
+        #Uso del nuevo operador += definido abajo
         self += Electronica(self.contador_ids, "iPhone 13", 600, v1)
         self += Ropa(self.contador_ids, "Camiseta Vintage", 25, v2)
         self += Hogar(self.contador_ids, "Lámpara de pie", 45, v3)
 
-    # T08: Sobrecarga de += para añadir productos al inventario directamente [cite: 306, 312]
-    def __iadd__(self, producto):
+    #Sobrecarga de += para añadir productos al inventario directamente
+    def __iadd__(self, producto: 'Producto') -> 'Marketplace':
         if isinstance(producto, Producto):
             self._inventario.append(producto)
             self.contador_ids += 1
         return self
 
-    # T07: Permite usar len(mercado) para saber cuántos productos hay [cite: 20, 82]
-    def __len__(self):
+    #Permite usar len(mercado) para saber cuántos productos hay
+    def __len__(self) -> int:
          return len(self._inventario)
 
-    # T08: Permite acceder a productos por índice: mercado[0]
-    def __getitem__(self, index):
+    #Permite acceder a productos por índice: mercado[0]
+    def __getitem__(self, index: int) -> 'Producto':
         return self._inventario[index]
 
-    # T07: Determina si el mercado tiene existencias en un contexto booleano
-    def __bool__(self):
+    #   Determina si el mercado tiene existencias en un contexto booleano
+    def __bool__(self) -> bool:
         return len(self._inventario) > 0
 
     def vender_producto(self, producto):
