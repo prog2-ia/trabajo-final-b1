@@ -101,6 +101,7 @@ def app() -> None:
                         print(f"\n[ERROR] {e}")
 
 
+
                 elif opc == "4":
 
                     try:
@@ -111,40 +112,47 @@ def app() -> None:
 
                         prod = mercado.buscar_producto(id_p)
 
-                        # Si el producto existe, mostramos el submenú
+                        # --- VALIDACIÓN DE DUEÑO ---
+
+                        vendedor_auth = input("Introduce tu nombre de vendedor para identificarte: ")
+
+                        if vendedor_auth.lower() != prod.vendedor.nombre.lower():
+                            print(f"\n[!] ACCESO DENEGADO: Solo {prod.vendedor.nombre} puede gestionar este producto.")
+
+                            continue  # Volver al menú principal
+
+                        # Si el nombre coincide, mostramos el submenú
 
                         sub_opc = interfaz.mostrar_submenu_gestion()
 
                         if sub_opc == "1":
 
-                            print(f"Modificando: {prod.nombre}")
+                            print(f"\nModificando: {prod.nombre} (Vendedor: {prod.vendedor.nombre})")
 
                             nuevo_nombre = input("Nuevo nombre (deja vacío para no cambiar): ")
 
-                            nuevo_precio = input("Nuevo precio (deja vacío para no cambiar): ")
+                            nuevo_precio_str = input("Nuevo precio (deja vacío para no cambiar): ")
 
                             if nuevo_nombre:
                                 prod.nombre = nuevo_nombre
 
-                            if nuevo_precio:
+                            if nuevo_precio_str:
 
                                 try:
 
-                                    p_float = float(nuevo_precio)
+                                    p_float = float(nuevo_precio_str)
 
-                                    if p_float > 0:
+                                    # Esto disparará el setter de Producto que ya tiene su propia excepción
 
-                                        prod.precio = p_float
+                                    prod.precio = p_float
 
-                                    else:
+                                    print("[*] Precio actualizado.")
 
-                                        print("[!] El precio no puede ser negativo, no se ha cambiado.")
+                                except (ValueError, ErrorValidacionPrecio) as e:
 
-                                except ValueError:
+                                    print(f"[!] Error al cambiar precio: {e}")
 
-                                    print("[!] Precio no válido, no se ha cambiado.")
-
-                            print("\n[OK] Producto actualizado con éxito.")
+                            print("\n[OK] Características actualizadas con éxito.")
 
 
                         elif sub_opc == "2":
@@ -153,22 +161,18 @@ def app() -> None:
 
                             if confirmar.lower() == 's':
 
-                                mercado.comprar_final(id_p)  # Reutilizamos la función de borrar
+                                mercado.comprar_final(id_p)
 
-                                print("\n[OK] Producto eliminado del catálogo.")
+                                print("\n[OK] Producto eliminado correctamente.")
 
                             else:
 
-                                print("\nOperación cancelada.")
+                                print("\nEliminación cancelada.")
 
 
                         elif sub_opc == "3":
 
-                            continue  # Vuelve al menú principal
-
-                        else:
-
-                            print("\n[!] Opción de submenú no válida.")
+                            continue
 
 
                     except ValueError:
