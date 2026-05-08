@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from datos.vendedor import Vendedor
+from logica.excepciones import ErrorValidacionPrecio
 
 class Producto(ABC):
     def __init__(self, id_prod: int, nombre: str, precio: float, vendedor_obj: Vendedor):
@@ -15,7 +16,13 @@ class Producto(ABC):
 
     @precio.setter
     def precio(self, valor: float) -> None:
-        self.__precio = round(float(valor), 1) if valor >= 0 else 0.0
+        try:
+            valor_float = float(valor)
+            if valor_float <= 0:
+                raise ErrorValidacionPrecio("El precio debe ser mayor que cero.")
+            self.__precio = round(valor_float, 1)
+        except ValueError:
+            raise ErrorValidacionPrecio("El precio debe ser un valor numérico.")
 
     @abstractmethod
     def __str__(self) -> str:

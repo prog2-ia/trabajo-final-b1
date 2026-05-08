@@ -3,6 +3,7 @@ from datos.subproductos import Electronica, Ropa, Hogar, Deportes
 from datos.tacanyo import Tacanyo
 from datos.normal import Normal
 from datos.desesperado import Desesperado
+from logica.excepciones import ProductoNoEncontradoError
 
 class Marketplace:
     def __init__(self) -> None: #Creamos el inventario
@@ -40,16 +41,15 @@ class Marketplace:
     def vender_producto(self, producto: 'Producto') -> bool:
         self += producto  # Reutiliza el operador __iadd__
         return True
-    def comprar_final(self, id_prod: int) -> 'Producto': #Funcion para comprar y eliminarlo del inventario.
-        for p in self._inventario:
-            if p.id_prod == id_prod:
-                self._inventario.remove(p)
-                return p
-        return None
 
-    # Funcion para buscar y comprar un producto.
     def buscar_producto(self, id_p: int) -> 'Producto':
         for p in self._inventario:
             if p.id_prod == id_p:
                 return p
-        return None
+        raise ProductoNoEncontradoError(f"No existe ningún producto con el ID {id_p}.")
+
+    def comprar_final(self, id_prod: int) -> 'Producto':
+        # Reutilizamos buscar_producto para que lance la excepción si no existe
+        p = self.buscar_producto(id_prod)
+        self._inventario.remove(p)
+        return p

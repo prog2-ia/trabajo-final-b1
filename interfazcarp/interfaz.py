@@ -6,13 +6,35 @@ def mostrar_menu() -> str:
     print("1. Ver catalogo\n2. Vender producto\n3. Negociar/Comprar\n4. Salir")
     return input("Selección: ")
 
-def pedir_datos_venta() -> tuple: #Datos necesarios para publicar un producto.
+
+def pedir_datos_venta() -> tuple:
     print("\n--- PUBLICAR ---")
-    n: str = input("Nombre: ")
-    p: float = float(input("Precio: "))
-    v: str = input("Tu nombre: ")
-    print("Categoria: 1. Electronica | 2. Ropa | 3. Hogar | 4. Deportes")
-    c: str = input("Opcion: ")
+    n: str = input("Nombre del producto: ")
+
+    # Bucle para el PRECIO (Validación instantánea)
+    while True:
+        try:
+            p_input = input("Precio: ")
+            p: float = float(p_input)
+            if p <= 0:
+                print("[!] Error: El precio debe ser un número positivo.")
+                continue
+            break
+        except ValueError:
+            print("[!] Error: Introduce un valor numérico válido.")
+
+    v: str = input("Tu nombre (Vendedor): ")
+
+    # Bucle para la CATEGORÍA (Validación instantánea)
+    while True:
+        print("Categoría: 1. Electrónica | 2. Ropa | 3. Hogar | 4. Deportes")
+        c: str = input("Selecciona una opción (1-4): ")
+
+        if c in ["1", "2", "3", "4"]:
+            break  # Opción válida, salimos del bucle
+        else:
+            print(f"[!] '{c}' no es una opción válida. Por favor, elige un número del 1 al 4.")
+
     return n, p, v, c
 
 def mostrar_resultado_negociacion(estado: str, valor: float, producto: 'Producto') -> None: #Al negociar definimos las 3 respuestas.
