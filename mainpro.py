@@ -25,29 +25,21 @@ def app() -> None:
                             print(p)
 
                 elif opc == "2":
-                    try:
-                        n, p, v_nom, cat = interfaz.pedir_datos_venta()
-                        # El tipo de vendedor se elige al azar para el nuevo producto
-                        clase_v = random.choice([Desesperado, Normal, Tacanyo])
-                        v = clase_v(v_nom)
+                    n, p, v_nom, cat = interfaz.pedir_datos_venta()
+                    clase_v = random.choice([Desesperado, Normal, Tacanyo])
+                    v = clase_v(v_nom)
 
-                        if cat == "1":
-                            nuevo = Electronica(mercado.contador_ids, n, p, v)
-                        elif cat == "2":
-                            nuevo = Ropa(mercado.contador_ids, n, p, v)
-                        elif cat == "3":
-                            nuevo = Hogar(mercado.contador_ids, n, p, v)
-                        elif cat == "4":
-                            nuevo = Deportes(mercado.contador_ids, n, p, v)
-                        else:
-                            # Lanzamos excepción si el usuario pone algo como "9"
-                            raise MarketplaceError(f"La categoría '{cat}' no existe.")
+                    if cat == "1":
+                        nuevo = Electronica(mercado.contador_ids, n, p, v)
+                    elif cat == "2":
+                        nuevo = Ropa(mercado.contador_ids, n, p, v)
+                    elif cat == "3":
+                        nuevo = Hogar(mercado.contador_ids, n, p, v)
+                    else:
+                        nuevo = Deportes(mercado.contador_ids, n, p, v)
 
-                        mercado.vender_producto(nuevo)
-                        print("\n[OK] Producto publicado con éxito.")
-
-                    except (ValueError, MarketplaceError) as e:
-                        print(f"\n[ERROR de datos] {e}")
+                    mercado.vender_producto(nuevo)
+                    print(f"\n[OK] {nuevo.nombre} publicado con éxito.")
 
 
                 elif opc == "3":
@@ -56,7 +48,11 @@ def app() -> None:
 
                         id_p_str = input("ID del producto: ")
 
+                        # Intentamos convertir a número
+
                         id_p = int(id_p_str)
+
+                        # Si llega aquí, es que es un número. Buscamos el producto.
 
                         prod = mercado.buscar_producto(id_p)
 
@@ -70,17 +66,12 @@ def app() -> None:
 
                                 oferta = float(oferta_str)
 
-                                # --- NUEVA VALIDACIÓN DE VACILE ---
-
                                 if oferta < 0:
-                                    print("\n[!] ¿Me estás vacilando? Que significa un número negativo...")
+                                    print("\n[!] ¿Me estás vacilando? Introduce una mejor oferta...")
 
-                                    continue  # Salta el resto del bucle y vuelve a pedir la oferta
+                                    continue
 
-                                if oferta == 0:
-                                    break
-
-                                # Si la oferta es positiva, procedemos con la lógica normal
+                                if oferta == 0: break
 
                                 res, val = prod.vendedor.negociar(prod.precio, oferta)
 
@@ -94,27 +85,115 @@ def app() -> None:
 
                             except ValueError:
 
-                                print("[!] Error: La oferta debe ser un número (ej: 12.5).")
+                                # Este error salta si pones letras en la OFERTA
+
+                                print("[!] Error: Por favor, introduce un número válido para la oferta.")
 
 
-                    except (ValueError, ProductoNoEncontradoError) as e:
+                    except ValueError:
+
+                        # Este error salta si pones letras en el ID de la compra
+
+                        print("\n[!] Error: El ID del producto debe ser un número válido.")
+
+                    except ProductoNoEncontradoError as e:
 
                         print(f"\n[ERROR] {e}")
 
+
                 elif opc == "4":
-                    # Salida controlada del bucle
+
+                    try:
+
+                        id_p_str = input("ID del producto a gestionar: ")
+
+                        id_p = int(id_p_str)
+
+                        prod = mercado.buscar_producto(id_p)
+
+                        # Si el producto existe, mostramos el submenú
+
+                        sub_opc = interfaz.mostrar_submenu_gestion()
+
+                        if sub_opc == "1":
+
+                            print(f"Modificando: {prod.nombre}")
+
+                            nuevo_nombre = input("Nuevo nombre (deja vacío para no cambiar): ")
+
+                            nuevo_precio = input("Nuevo precio (deja vacío para no cambiar): ")
+
+                            if nuevo_nombre:
+                                prod.nombre = nuevo_nombre
+
+                            if nuevo_precio:
+
+                                try:
+
+                                    p_float = float(nuevo_precio)
+
+                                    if p_float > 0:
+
+                                        prod.precio = p_float
+
+                                    else:
+
+                                        print("[!] El precio no puede ser negativo, no se ha cambiado.")
+
+                                except ValueError:
+
+                                    print("[!] Precio no válido, no se ha cambiado.")
+
+                            print("\n[OK] Producto actualizado con éxito.")
+
+
+                        elif sub_opc == "2":
+
+                            confirmar = input(f"¿Seguro que quieres eliminar '{prod.nombre}'? (s/n): ")
+
+                            if confirmar.lower() == 's':
+
+                                mercado.comprar_final(id_p)  # Reutilizamos la función de borrar
+
+                                print("\n[OK] Producto eliminado del catálogo.")
+
+                            else:
+
+                                print("\nOperación cancelada.")
+
+
+                        elif sub_opc == "3":
+
+                            continue  # Vuelve al menú principal
+
+                        else:
+
+                            print("\n[!] Opción de submenú no válida.")
+
+
+                    except ValueError:
+
+                        print("\n[!] Error: El ID debe ser un número válido.")
+
+                    except ProductoNoEncontradoError as e:
+
+                        print(f"\n[ERROR] {e}")
+
+                elif opc == "5":  # Ahora Salir es la opción 5
                     break
 
                 else:
-                    # VALIDACIÓN DE OPCIÓN DE MENÚ
-                    print(f"\n[!] '{opc}' no es una opción válida del menú. Intenta con 1, 2, 3 o 4.")
+                    print(f"\n[!] '{opc}' no es una opción válida (1-5).")
 
             except Exception as e:
-                # Captura de cualquier error no previsto para que el programa no "pete"
                 print(f"\n[ERROR CRÍTICO INESPERADO] {e}")
 
+    except KeyboardInterrupt:
+        # Capturamos el "botón rojo" o Ctrl+C
+        print("\n\n[!] Interrupción detectada: Has cerrado el programa de forma repentina.")
+
     finally:
-        # El bloque finally se ejecuta tanto si haces "break" como si hay un error fatal
+        # Este mensaje saldrá SIEMPRE, ya sea por opción 4, error o interrupción
         print("\n" + "=" * 45)
         print("   Gracias por usar nuestra plataforma.")
         print("   ¡Esperamos verte pronto por aquí!")

@@ -3,7 +3,18 @@ from datos.producto import Producto
 
 def mostrar_menu() -> str:
     print("\n--- Marketplace ---")
-    print("1. Ver catalogo\n2. Vender producto\n3. Negociar/Comprar\n4. Salir")
+    print("1. Ver catálogo")
+    print("2. Vender producto")
+    print("3. Negociar/Comprar")
+    print("4. Gestionar Producto (Modificar/Eliminar)") # Nueva opción
+    print("5. Salir")
+    return input("Selección: ")
+
+def mostrar_submenu_gestion() -> str:
+    print("\n--- GESTIÓN DE PRODUCTO ---")
+    print("1. Cambiar características (Nombre/Precio)")
+    print("2. Eliminar producto")
+    print("3. Volver al menú principal")
     return input("Selección: ")
 
 
