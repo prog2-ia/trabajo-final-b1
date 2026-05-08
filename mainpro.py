@@ -4,7 +4,7 @@ from datos.desesperado import Desesperado
 from datos.normal import Normal
 from datos.tacanyo import Tacanyo
 from datos.subproductos import Electronica, Ropa, Hogar, Deportes
-from logica.excepciones import MarketplaceError, ProductoNoEncontradoError
+from logica.excepciones import ProductoNoEncontradoError
 import random
 
 
