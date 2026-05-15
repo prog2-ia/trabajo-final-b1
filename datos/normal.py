@@ -1,12 +1,12 @@
 from datos.vendedor import Vendedor
 import random
 
-class Normal(Vendedor): #Subclase 2º de vendedor.
+class Normal(Vendedor): #Subclase 2º de vendedor, comprador con ganas normales de venefrlo
     def __init__(self, nombre):
         super().__init__(nombre)
         self.frases_negociao = ["Creo que el precio es justo.", "Podemos llegar a un acuerdo.", "Ni para ti ni para mí."]
 
-    def negociar(self, precio_original: float, oferta_comprador: float) -> tuple:
+    def negociar(self, precio_original: float, oferta_comprador: float) -> tuple: #Forma de negociar de un vendedor normal.
         if oferta_comprador >= precio_original * 0.85:
             return "ACEPTADA", round(oferta_comprador, 1)
         elif oferta_comprador >= precio_original * 0.75:
