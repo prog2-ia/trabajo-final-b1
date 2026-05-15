@@ -1,3 +1,5 @@
+#Definimos las excepciones mas comunes para evitar fallos en la ejecucion del programa.
+
 class MarketplaceError(Exception):
     """Clase base para excepciones del marketplace."""
     pass
