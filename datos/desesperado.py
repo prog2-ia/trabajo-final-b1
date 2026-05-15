@@ -5,7 +5,7 @@ class Desesperado(Vendedor): #Subclase 1º de vendedores con mayor probabilidad 
         super().__init__(nombre)
         self.frases_negociao = ["¡Necesito comer porfa!", "Uff, lo necesito vender ya...", "Acepta esto, es mi última esperanza. :("]
 
-    def negociar(self, precio_original: float, oferta_comprador: float) -> tuple: #Forma de comprar de un desesperado
+    def negociar(self, precio_original: float, oferta_comprador: float) -> tuple: #Forma de comprar de un desesperado.
         if oferta_comprador >= precio_original * 0.70:
             return "ACEPTADA", round(oferta_comprador, 1)
         return "RECHAZADA", 0.0
