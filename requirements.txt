@@ -2,4 +2,4 @@
 mypy==1.15.0
 
 # Soporte para tipado
-typing-extensions==4.12.2
+typing-extensions==4.14.1
