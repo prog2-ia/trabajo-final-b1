@@ -1,7 +1,7 @@
 import random
 from datos.producto import Producto
 
-def mostrar_menu() -> str:
+def mostrar_menu() -> str: #Menu principal del usuario
     print("\n--- Marketplace ---")
     print("1. Ver catálogo")
     print("2. Vender producto")
@@ -10,7 +10,7 @@ def mostrar_menu() -> str:
     print("5. Salir")
     return input("Selección: ")
 
-def mostrar_submenu_gestion() -> str:
+def mostrar_submenu_gestion() -> str: #Submenu para gestionar productos
     print("\n--- GESTIÓN DE PRODUCTO ---")
     print("1. Cambiar características (Nombre/Precio)")
     print("2. Eliminar producto")
@@ -18,7 +18,7 @@ def mostrar_submenu_gestion() -> str:
     return input("Selección: ")
 
 
-def pedir_datos_venta() -> tuple:
+def pedir_datos_venta() -> tuple: #Funcion para poner a la venta un producto
     print("\n--- PUBLICAR ---")
     n: str = input("Nombre del producto: ")
 
@@ -27,11 +27,11 @@ def pedir_datos_venta() -> tuple:
         try:
             p_input = input("Precio: ")
             p: float = float(p_input)
-            if p <= 0:
+            if p <= 0: #Controlamos posibles datos invalidos
                 print("[!] Error: El precio debe ser un número positivo.")
                 continue
             break
-        except ValueError:
+        except ValueError: #Mas valores invalidos
             print("[!] Error: Introduce un valor numérico válido.")
 
     v: str = input("Tu nombre (Vendedor): ")
