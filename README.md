@@ -28,10 +28,11 @@ El proyecto está organizado en paquetes para una mayor modularidad:
 
 ## Cómo ejecutar el programa
 1. **Instalación:** Para instalar las dependencias, ejecuta:
-   ```bash
-   pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 2. **Ejecución:** Inicia el Marketplace desde la terminal:
-  ```bash
+```bash
 python mainpro.py
 ```
 ## Notas sobre el Sistema de Archivos
