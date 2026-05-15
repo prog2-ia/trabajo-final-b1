@@ -10,7 +10,7 @@ class GestorDatos:
     FILE_HISTORIAL = "almacen/historial_ventas.txt"
 
     @classmethod
-    def guardar_inventario(cls, lista_productos):
+    def guardar_inventario(cls, lista_productos): #Funcion para guardar el inventario actual de la tienda.
         """Usa el modo 'w' para sobrescribir el catálogo actual."""
         try:
             with open(cls.FILE_INVENTARIO, "w", encoding="utf-8") as f:
@@ -24,7 +24,7 @@ class GestorDatos:
             print(f"[!] Error al escribir en el fichero: {e}")
 
     @classmethod
-    def cargar_inventario(cls, mercado_obj):
+    def cargar_inventario(cls, mercado_obj): #Funcion para cagar el inventario de la tienda.
         """Usa el modo 'r' para leer y reconstruir los objetos."""
         try:
             with open(cls.FILE_INVENTARIO, "r", encoding="utf-8") as f:
@@ -62,7 +62,7 @@ class GestorDatos:
             pass
 
     @classmethod
-    def generar_factura(cls, producto, precio_final):
+    def generar_factura(cls, producto, precio_final): #Generamos una factura de los productos comprados a lo largo de la sesion que se ejecuta al finalizar.
         """Crea factura (modo 'w') y actualiza el historial (modo 'a')."""
         ruta_fac = f"almacen/factura_{producto.id_prod}.txt"
 
