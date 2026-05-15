@@ -1,3 +1,4 @@
+#Importamotodo lo necesario para que funcione el main.
 from interfazcarp import interfaz
 from logica.marketplace import Marketplace
 from datos.desesperado import Desesperado
@@ -9,10 +10,9 @@ from logica.persistencias import GestorDatos
 import random
 
 
-def app() -> None:
+def app() -> None: #Vaciamos archivos previos.
     # --- LÓGICA DE REINICIO (Sustituir archivos de 0) ---
     # Abrimos los archivos en modo 'w' y cerramos al instante.
-    # Esto los vacía completamente antes de empezar la lógica del programa.
     with open("almacen/inventario.txt", "w", encoding="utf-8") as f:
         pass
     with open("almacen/historial_ventas.txt", "w", encoding="utf-8") as f:
@@ -30,7 +30,7 @@ def app() -> None:
             try:
                 opc: str = interfaz.mostrar_menu()
 
-                if opc == "1":
+                if opc == "1": #Opcion para ver los diferentes productos disponibles.
                     if not mercado:
                         print("\n[!] El catálogo está vacío.")
                     else:
@@ -38,12 +38,12 @@ def app() -> None:
                         for p in mercado:
                             print(p)
 
-                elif opc == "2":
+                elif opc == "2": #Opcion de vender un producto
                     n, p, v_nom, cat = interfaz.pedir_datos_venta()
                     clase_v = random.choice([Desesperado, Normal, Tacanyo])
                     v = clase_v(v_nom)
 
-                    if cat == "1":
+                    if cat == "1": #Aqui se elije la categoria.
                         nuevo = Electronica(mercado.contador_ids, n, p, v)
                     elif cat == "2":
                         nuevo = Ropa(mercado.contador_ids, n, p, v)
@@ -61,14 +61,14 @@ def app() -> None:
                     print("!" * 40)
 
 
-                elif opc == "3":
+                elif opc == "3": #Opcion de comprar un producto
                     try:
                         id_p_str = input("ID del producto: ")
                         id_p = int(id_p_str)
                         prod = mercado.buscar_producto(id_p)
                         negociando: bool = True
 
-                        while negociando:
+                        while negociando: #Funcionamiento de las negociaciones
                             try:
                                 oferta_str = input(f"Oferta por {prod.nombre} (0 para cancelar): ")
                                 oferta = float(oferta_str)
@@ -108,7 +108,7 @@ def app() -> None:
     except KeyboardInterrupt:
         print("\n\n[!] Ejecución finalizada.")
 
-    finally:
+    finally: #Comentario al terminar el programa
         print("\n" + "=" * 45)
         print("   Sesión terminada. Los archivos se borrarán al iniciar de nuevo.")
         print("=" * 45)
