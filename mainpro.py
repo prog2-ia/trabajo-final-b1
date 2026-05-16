@@ -16,7 +16,7 @@ def app() -> None:
     with open("almacen/historial_ventas.txt", "w", encoding="utf-8") as f:
         pass
 
-    # Eliminamos físicamente todas las facturas de la ejecución anterior
+    # Eliminamos todas las facturas de la ejecución anterior
     GestorDatos.limpiar_sesion_anterior()
 
     print("[SISTEMA] Ficheros e historial de 'almacen' eliminados y reiniciados para esta sesión.")
