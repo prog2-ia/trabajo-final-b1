@@ -1,6 +1,0 @@
-********** FACTURA **********
-ID Producto: 1
-Nombre: iPhone 13
-Vendedor: Julián
-Precio pagado: 1000.0€
-*****************************
