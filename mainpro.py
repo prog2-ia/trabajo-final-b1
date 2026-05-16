@@ -23,7 +23,7 @@ def app() -> None:
 
     mercado: Marketplace = Marketplace()
 
-    # Intentamos cargar (estará vacío inicialmente por el rastro limpio)
+    # Intentamos cargar
     GestorDatos.cargar_inventario(mercado)
 
     try:
