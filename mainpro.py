@@ -10,7 +10,7 @@ import random
 
 
 def app() -> None:
-    # --- LÓGICA DE REINICIO ABSOLUTO (Sustituir archivos de cero) ---
+    # Sustituir archivos de cero
     with open("almacen/inventario.txt", "w", encoding="utf-8") as f:
         pass
     with open("almacen/historial_ventas.txt", "w", encoding="utf-8") as f:
