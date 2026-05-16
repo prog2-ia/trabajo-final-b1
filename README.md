@@ -10,7 +10,7 @@ Al iniciar, el sistema carga los productos de sesiones anteriores. Puedes vender
 * **Vendedores con personalidades:** Tipos **Tacaño**, **Normal** y **Desesperado** con estrategias de negociación y frases únicas.
 * **Gestión de Ficheros (Persistencia):** * **Inventario:** Los productos se guardan en `inventario.txt`, manteniendo un rastro separado por cada ejecución mediante marcas visuales.
     * **Historial de Ventas:** Registro acumulativo de todas las transacciones en `historial_ventas.txt`.
-    * **Facturación:** Generación automática de archivos `.txt` individuales por cada compra realizada.
+    * **Facturación:** Generación automática de archivos `.txt` y `.pkl` individuales por cada compra realizada.
 * **Negociación Persistente:** Bucle de regateo activo hasta cerrar el trato o cancelar la oferta.
 * **Encapsulamiento y Excepciones:** Protección de precios mediante miembros privados y gestión de errores personalizados (ID no encontrado, errores de validación, etc.).
 
@@ -20,7 +20,7 @@ El proyecto está organizado en paquetes para una mayor modularidad:
 * **`datos/`**: Contiene las definiciones de `vendedor.py`, `producto.py`, `subproductos.py` y las diferentes lógicas de los vendedores (`desesperado.py`, `normal.py`, `tacanyo.py`).
 * **`logica/`**: 
     * `marketplace.py`: Gestión del inventario en memoria.
-    * `persistencias.py`: Motor de manejo de ficheros (lectura, escritura y anexado de texto).
+    * `persistencias.py`: Motor de manejo de ficheros de texto y binarios.
     * `excepciones.py`: Definición de errores personalizados.
 * **`interfazcarp/`**: Contiene todos los archivos de la interfaz, incluyendo `interfaz.py` para el manejo de menús y mensajes.
 * **`almacen/`**: Carpeta de destino de todos los archivos generados (Facturas, Inventario y Logs).
