@@ -9,7 +9,7 @@ from logica.persistencias import GestorDatos
 import random
 
 
-def app() -> None:
+def app() -> None: #Liampamos los nuevos archivos creados entre ejecuciones.
     # Sustituir archivos de cero
     with open("almacen/inventario.txt", "w", encoding="utf-8") as f:
         pass
@@ -31,7 +31,7 @@ def app() -> None:
             try:
                 opc: str = interfaz.mostrar_menu()
 
-                if opc == "1":
+                if opc == "1": #Opcion de ver el catalogo.
                     if not mercado:
                         print("\n[!] El catálogo está vacío.")
                     else:
@@ -39,7 +39,7 @@ def app() -> None:
                         for p in mercado:
                             print(p)
 
-                elif opc == "2":
+                elif opc == "2": #Opcion de crear un producto para ponerlo a la venta
                     n, p, v_nom, cat = interfaz.pedir_datos_venta()
                     clase_v = random.choice([Desesperado, Normal, Tacanyo])
                     v = clase_v(v_nom)
@@ -60,7 +60,7 @@ def app() -> None:
                     print("[AVISO] Revisa el fichero 'inventario.txt' en la carpeta 'almacen'.")
                     print("!" * 40)
 
-                elif opc == "3":
+                elif opc == "3": # Opcion para comprar un producto
                     try:
                         id_p_str = input("ID del producto: ")
                         id_p = int(id_p_str)
@@ -73,7 +73,7 @@ def app() -> None:
                         prod = mercado.buscar_producto(id_p)
                         negociando: bool = True
 
-                        while negociando:
+                        while negociando: #Funcionamiento de las negociaciones
                             try:
                                 oferta_str = input(f"Oferta por {prod.nombre} (0 para cancelar): ")
                                 oferta = float(oferta_str)
@@ -87,7 +87,7 @@ def app() -> None:
                                 res, val = prod.vendedor.negociar(prod.precio, oferta)
                                 interfaz.mostrar_resultado_negociacion(res, val, prod)
 
-                                if res == "ACEPTADA":
+                                if res == "ACEPTADA": #Respuesta para cuando es acertada la oferta
                                     mercado.comprar_final(id_p)
                                     GestorDatos.generar_factura(prod, val)
                                     GestorDatos.guardar_inventario(mercado)
@@ -138,7 +138,7 @@ def app() -> None:
                             print("\n[!] Error: Opción de gestión fuera de rango. Selecciona 1 o 2.")
                             continue
 
-                        if sub_opc == "1":
+                        if sub_opc == "1": #Opcion para modificar el precio de un producto.
                             nuevo_precio = float(input(f"Nuevo precio para {prod.nombre} (Actual: {prod.precio}€): "))
 
                             # Excepción para precios negativos
@@ -150,7 +150,7 @@ def app() -> None:
                             GestorDatos.guardar_inventario(mercado)
                             print(f"\n[OK] Precio actualizado con éxito en memoria y en 'inventario.txt'.")
 
-                        elif sub_opc == "2":
+                        elif sub_opc == "2": #Opcion para eliminar el producto de venta
                             if hasattr(mercado, 'eliminar_producto'):
                                 mercado.eliminar_producto(id_p)
                             else:
@@ -165,7 +165,7 @@ def app() -> None:
                         print(
                             "\n[!] Error: Tipo de dato no válido. Has introducido texto donde correspondía un número.")
 
-                elif opc == "5":
+                elif opc == "5": #Opcion para terminar la ejecucion del programa
                     break
 
                 else:
@@ -177,7 +177,7 @@ def app() -> None:
     except KeyboardInterrupt:
         print("\n\n[!] Ejecución finalizada por el usuario.")
 
-    finally:
+    finally: #Mensaje final para cuando se termine la ejecucion.
         print("\n" + "=" * 45)
         print("   Sesión terminada. Los archivos se reiniciarán al iniciar de nuevo.")
         print("=" * 45)
