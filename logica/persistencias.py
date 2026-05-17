@@ -22,10 +22,10 @@ class GestorDatos:
             ruta_txt = f"almacen/factura_{i}.txt"
             ruta_pickle = f"almacen/factura_{i}.pickle"
 
-            if os.path.exists(ruta_txt):  # Comprueba si existe el archivo de texto (Pág. 19)
-                os.remove(ruta_txt)  # Lo elimina físicamente (Pág. 27)
-            if os.path.exists(ruta_pickle):  # Comprueba si existe el binario (Pág. 19)
-                os.remove(ruta_pickle)  # Lo elimina físicamente (Pág. 27)
+            if os.path.exists(ruta_txt):  # Comprueba si existe el archivo de texto
+                os.remove(ruta_txt)  # Lo elimina físicamente
+            if os.path.exists(ruta_pickle):  # Comprueba si existe el binario
+                os.remove(ruta_pickle)  # Lo elimina físicamente
 
     @classmethod
     def guardar_inventario(cls, mercado):
