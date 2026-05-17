@@ -57,7 +57,7 @@ def app() -> None: #Liampamos los nuevos archivos creados entre ejecuciones.
                     GestorDatos.guardar_inventario(mercado)
 
                     print("\n" + "!" * 40)
-                    print("[AVISO] Revisa el fichero 'inventario.txt' en la carpeta 'almacen'.")
+                    print("[AVISO] Revisa el fichero 'inventario.txt' en la carpeta 'almacen' al salir del programa.")
                     print("!" * 40)
 
                 elif opc == "3": # Opcion para comprar un producto
