@@ -8,6 +8,7 @@ from logica.excepciones import ProductoNoEncontradoError, ErrorValidacionPrecio
 from logica.persistencias import GestorDatos
 import random
 import os
+import pickle
 
 
 def app() -> None:
