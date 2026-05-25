@@ -7,14 +7,22 @@ from datos.subproductos import Electronica, Ropa, Hogar, Deportes
 from logica.excepciones import ProductoNoEncontradoError, ErrorValidacionPrecio
 from logica.persistencias import GestorDatos
 import random
+import os
 
 
-def app() -> None: #Liampamos los nuevos archivos creados entre ejecuciones.
-    # Sustituir archivos de cero
-    with open("almacen/inventario.txt", "w", encoding="utf-8") as f:
-        pass
-    with open("almacen/historial_ventas.txt", "w", encoding="utf-8") as f:
-        pass
+def app() -> None:
+    # 1. Aseguramos que la carpeta existe pase lo que pase
+    if not os.path.exists("almacen"):
+        os.makedirs("almacen")
+
+    # 2. Aseguramos que los ficheros de texto existen para que no rompa la carga
+    if not os.path.exists("almacen/inventario.txt"):
+        with open("almacen/inventario.txt", "w", encoding="utf-8") as f:
+            pass
+
+    if not os.path.exists("almacen/historial_ventas.txt"):
+        with open("almacen/historial_ventas.txt", "w", encoding="utf-8") as f:
+            pass
 
     # Eliminamos todas las facturas de la ejecución anterior
     GestorDatos.limpiar_sesion_anterior()
